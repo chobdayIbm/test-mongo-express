@@ -6,7 +6,7 @@ before('Runs before all tests suites', () => {
 })
 
 describe('Test infrastructure', () => {
-    it('should be ready', async () => {
+    it('is running', async () => {
         const result = await new Promise((resolve,reject) => resolve())
         return result
     })

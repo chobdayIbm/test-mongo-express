@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2020-05-15T10:24:16.208Z",
-    "end": "2020-05-15T10:24:16.226Z",
-    "duration": 18,
+    "start": "2020-05-15T10:48:05.377Z",
+    "end": "2020-05-15T10:48:05.393Z",
+    "duration": 16,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "9ae9a9bc-e5d2-4e27-bd7f-a5c0f0849f11",
+      "uuid": "a8948643-6fe3-45a6-ab10-91cb4060b326",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -36,8 +36,8 @@
           "context": null,
           "code": "console.log(`Tests start at ${new Date()}`);",
           "err": {},
-          "uuid": "137f423c-547b-45d5-8e4d-8303c78053c1",
-          "parentUUID": "9ae9a9bc-e5d2-4e27-bd7f-a5c0f0849f11",
+          "uuid": "dc9198f9-9e7e-4881-9206-e37d93e27c71",
+          "parentUUID": "a8948643-6fe3-45a6-ab10-91cb4060b326",
           "isHook": true,
           "skipped": false
         }
@@ -56,8 +56,8 @@
           "context": null,
           "code": "console.log(`Tests end at ${new Date()}`);",
           "err": {},
-          "uuid": "83e734b0-d1db-4740-8313-fcc2b70d3223",
-          "parentUUID": "9ae9a9bc-e5d2-4e27-bd7f-a5c0f0849f11",
+          "uuid": "ea159346-5c60-4780-8acf-a7befeaa7920",
+          "parentUUID": "a8948643-6fe3-45a6-ab10-91cb4060b326",
           "isHook": true,
           "skipped": false
         }
@@ -65,7 +65,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "b9b45b68-4ca4-4644-a7da-281e008667dc",
+          "uuid": "525e5214-efbe-4097-b222-c3af35b32c54",
           "title": "Test infrastructure",
           "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/root.spec.js",
           "file": "/test/root.spec.js",
@@ -73,8 +73,8 @@
           "afterHooks": [],
           "tests": [
             {
-              "title": "should be ready",
-              "fullTitle": "Test infrastructure should be ready",
+              "title": "is running",
+              "fullTitle": "Test infrastructure is running",
               "timedOut": false,
               "duration": 1,
               "state": "passed",
@@ -85,15 +85,15 @@
               "context": null,
               "code": "const result = await new Promise((resolve, reject) => resolve());\nreturn result;",
               "err": {},
-              "uuid": "6c921af4-109d-45be-ace4-3fed069da5ea",
-              "parentUUID": "b9b45b68-4ca4-4644-a7da-281e008667dc",
+              "uuid": "eb9cfdaf-55c6-4c5a-a3e4-c095f9b32230",
+              "parentUUID": "525e5214-efbe-4097-b222-c3af35b32c54",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "6c921af4-109d-45be-ace4-3fed069da5ea"
+            "eb9cfdaf-55c6-4c5a-a3e4-c095f9b32230"
           ],
           "failures": [],
           "pending": [],
