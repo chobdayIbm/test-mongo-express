@@ -1,8 +1,11 @@
 import chai from 'chai'
 chai.should()
 
-before('Runs before all tests suites', () => {
+import mongoHelper from './common.helper'
+
+before('Runs before all tests suites', async () => {
     console.log(`Tests start at ${new Date()}`)
+    await mongoHelper.start()
 })
 
 describe('Test infrastructure', () => {
