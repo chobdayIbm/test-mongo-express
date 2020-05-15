@@ -1,6 +1,6 @@
-# Adding automated tests to a legacy application #
+# Adding automated tests to a legacy application
 
-## Infrastructure Setup ##
+## Infrastructure Setup
 The first step is to setup the test infrastructure 
 
 Note the updated `package.json` with new dev dependencies
@@ -15,21 +15,25 @@ Note the configurations in
 * .nycrc.yaml
 * nodemon.json
 
-## First Test **
+## First Test
 Please look at `test/root.spec.js`
 Run it whenever the codes change using 
-```
-npm run test:watch
-```
+`npm run test:watch`
 Babel, nodemon and mocha need to be setup properly
 
 To run coverage
-```
-npm run coverage
-```
+`npm run coverage`
 
 Before committing to git, update `.gitignore` to ignore nyc output
 
+## Main Flow
+Please look at `test/main.spec.js` and note how it makes use of _test helpers_.  
+The module `supertest` is added because this is an Express app  
+The module `mongodb-memory-server` is added to run tests quickly against MongoDB  
+
+Remember to run `npm run coverage` before committing.  For this example, it covers 
+* >70% of statements  
+* >30% of branches.
 
 
 ## Background of legacy app ##
@@ -37,20 +41,3 @@ It is a example of ~2014 Node.js Mongoose application, to CRUD for insurance pol
 
 mongoose 3 uses bson@0.4.23 which has a ciritical issue with BSON serialization and will not work
 
-### To create the test data
-db.policies.insertOne({
-    policyNumber: "12",
-    firstName: "John",
-    lastName: "Tan",
-    validDate: new Date("2018-01-01"),
-})
-
-Insert claim
-{
-	"description": "test2",
-	"policyNumber": "12",
-	"issues": [
-		{"title": "tissue", "description": "tissue"}
-	]
-}
-###

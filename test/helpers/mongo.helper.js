@@ -60,11 +60,20 @@ export default class MongoHelper {
     return ops[0];
   }
 
-  async list(collectionName) {
+  async find(collectionName, query) {
+    console.log(query)
     const result = await this.db
       .collection(collectionName)
-      .find();
-    console.log(await result.toArray())
-    return result;
+      .find(query)
+      .toArray()
+    return result
+  }
+
+  async findOne(collectionName, query) {
+    console.log(query)
+    const result = await this.db
+      .collection(collectionName)
+      .findOne(query)
+    return result
   }
 }
