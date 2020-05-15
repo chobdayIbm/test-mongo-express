@@ -1,0 +1,9 @@
+{
+    "ignore": [
+        "testResults/",
+        "coverage"
+    ],
+    "exec": "babel-node",
+    "presets": "@babel/preset-env"
+} 
+    
