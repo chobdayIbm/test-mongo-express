@@ -1,9 +1,9 @@
 var server = require("./server");
 var handlers = require("./handlers")
-// var database = require("./database")
+var database = require("./database")
 
 var port = 9090;
-var connectionString = "mongodb://localhost/example";
+var connectionString = "mongodb://localhost/exampleDb";
 
-// database.initialize(connectionString);
+database.initialize(connectionString);
 server.start(port, handlers.setupHandlers);

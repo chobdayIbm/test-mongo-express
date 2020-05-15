@@ -1,0 +1,1 @@
+// mongoose 3 uses bson@0.4.23 which has a ciritical issue with BSON serialization

@@ -1,5 +1,5 @@
 // var PolicyHandler = require("./handlers/policyHandler");
-// var ClaimHandler = require("./handlers/claimHandler");
+var ClaimHandler = require("./handlers/claimHandler");
 
 function setupHandlers(router) {
 	router.get("/", function(request, response) {
@@ -16,9 +16,9 @@ function setupHandlers(router) {
 	// 	PolicyHandler.search(request, response);
 	// });
 	
-	// router.get("/claims", function(request, response) {
-	// 	ClaimHandler.getAll(request, response);
-	// });
+	router.get("/claims", function(request, response) {
+		ClaimHandler.getAll(request, response);
+	});
 	// router.get("/claims/:claimNumber", function(request, response) {
 	// 	ClaimHandler.get(request, response);
 	// });
