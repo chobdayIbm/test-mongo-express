@@ -1,0 +1,7 @@
+---
+reporter: html
+all: true
+exclude:
+- '**/testResults/**'
+- '**/test/**'
+- '**/coverage/**'

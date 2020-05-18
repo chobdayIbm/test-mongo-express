@@ -18,8 +18,9 @@ function start(port, setupHandlers) {
 
 	app.use("/", router);
 
-	app.listen(port);
+	const server = app.listen(port);
 	console.log("Listening on port " + port);
+	return server
 }
 
 exports.start = start;

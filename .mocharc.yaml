@@ -1,0 +1,14 @@
+---
+require: '@babel/register'
+reporter: mochawesome
+reporter-option:
+- 'reportTitle=Test Results'
+- 'reportPageTitle=Test Results'
+- 'reportDir=testResults'
+- 'reportFilename=testResults'
+- 'charts=true'
+- 'autoOpen=true'
+slow: 75
+timeout: 2000
+ui: bdd
+diff: true

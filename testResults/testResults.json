@@ -1,0 +1,260 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-05-15T14:29:03.803Z",
+    "end": "2020-05-15T14:29:04.087Z",
+    "duration": 284,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b6d121fc-7a02-4b4a-b059-e20facf9fb03",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [
+        {
+          "title": "\"before all\" hook: Runs before all tests suites",
+          "fullTitle": "\"before all\" hook: Runs before all tests suites",
+          "timedOut": false,
+          "duration": 78,
+          "state": null,
+          "speed": null,
+          "pass": false,
+          "fail": false,
+          "pending": false,
+          "context": null,
+          "code": "console.log(`Tests start at ${new Date()}`);\nawait _common.default.start();",
+          "err": {},
+          "uuid": "c1ad0ded-559d-41ab-8b14-2e0414dc922c",
+          "parentUUID": "b6d121fc-7a02-4b4a-b059-e20facf9fb03",
+          "isHook": true,
+          "skipped": false
+        }
+      ],
+      "afterHooks": [
+        {
+          "title": "\"after all\" hook: Runs after all tests suites",
+          "fullTitle": "\"after all\" hook: Runs after all tests suites",
+          "timedOut": false,
+          "duration": 0,
+          "state": null,
+          "speed": null,
+          "pass": false,
+          "fail": false,
+          "pending": false,
+          "context": null,
+          "code": "console.log(`Tests end at ${new Date()}`);",
+          "err": {},
+          "uuid": "08d48120-65ce-4b33-9039-24bac11e633c",
+          "parentUUID": "b6d121fc-7a02-4b4a-b059-e20facf9fb03",
+          "isHook": true,
+          "skipped": false
+        }
+      ],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8eeb124e-6ae8-4887-9f34-54417d93c950",
+          "title": "Main Flow",
+          "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/main.spec.js",
+          "file": "/test/main.spec.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook",
+              "fullTitle": "Main Flow \"before each\" hook",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "server = require('../src/index');\n_common.default.createDoc('policies', policy1);",
+              "err": {},
+              "uuid": "83ec5540-34ac-49c4-83a5-734960d9e4c4",
+              "parentUUID": "8eeb124e-6ae8-4887-9f34-54417d93c950",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook",
+              "fullTitle": "Main Flow \"after each\" hook",
+              "timedOut": false,
+              "duration": 2,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await _common.default.cleanup();",
+              "err": {},
+              "uuid": "dd7fad09-27ce-495f-a5d1-780994710e1b",
+              "parentUUID": "8eeb124e-6ae8-4887-9f34-54417d93c950",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "can view a policy",
+              "fullTitle": "Main Flow can view a policy",
+              "timedOut": false,
+              "duration": 40,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await (0, _supertest.default)(server).get(`/policies/${policy1.policyNumber}`);\nresponse.status.should.equal(200);\n(0, _match.default)(policy1, response.body, '_id');\nreturn response;",
+              "err": {},
+              "uuid": "fff342fd-d4c4-424e-abb0-9c870367e8b2",
+              "parentUUID": "8eeb124e-6ae8-4887-9f34-54417d93c950",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "can create a claim",
+              "fullTitle": "Main Flow can create a claim",
+              "timedOut": false,
+              "duration": 31,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await (0, _supertest.default)(server).post('/claims').send(claim1).set('Accept', 'application/json');\nconst claimNumber = response.body.claimNumber;\nresponse.status.should.equal(201);\nconst dbRecord = await _common.default.findOne('claims', {\n  claimNumber: claimNumber\n});\nclaim1.description.should.eql(dbRecord.description);\nclaim1.policyNumber.should.eql(dbRecord.policyNumber);\ndbRecord.issues.length.should.equals(1);\n(0, _match.default)(claim1.issues[0], dbRecord.issues[0], '_id');\nreturn response;",
+              "err": {},
+              "uuid": "e0227f07-2368-4523-b467-cb49cb0a94d2",
+              "parentUUID": "8eeb124e-6ae8-4887-9f34-54417d93c950",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "can view a claim",
+              "fullTitle": "Main Flow can view a claim",
+              "timedOut": false,
+              "duration": 6,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const {\n  _id\n} = await _common.default.createDoc('claims', claim1);\nconst response = await (0, _supertest.default)(server).get(`/claims?claimNumber=${_id}`);\nresponse.status.should.equal(200);\n(0, _match.default)(claim1, response.body[0], '_id');\nreturn response;",
+              "err": {},
+              "uuid": "a5affbe8-1941-4bb9-b5bb-fb0d12118163",
+              "parentUUID": "8eeb124e-6ae8-4887-9f34-54417d93c950",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fff342fd-d4c4-424e-abb0-9c870367e8b2",
+            "e0227f07-2368-4523-b467-cb49cb0a94d2",
+            "a5affbe8-1941-4bb9-b5bb-fb0d12118163"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 77,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "dfdda797-32e6-4c6c-b00a-4f53e5ddf503",
+          "title": "Test infrastructure",
+          "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/root.spec.js",
+          "file": "/test/root.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "is running",
+              "fullTitle": "Test infrastructure is running",
+              "timedOut": false,
+              "duration": 0,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const result = await new Promise((resolve, reject) => resolve());\nreturn result;",
+              "err": {},
+              "uuid": "666603b5-73c1-4307-8222-03f1627c3198",
+              "parentUUID": "dfdda797-32e6-4c6c-b00a-4f53e5ddf503",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "666603b5-73c1-4307-8222-03f1627c3198"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.1.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "testResults",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportTitle": "Test Results",
+        "reportPageTitle": "Test Results",
+        "reportDir": "testResults",
+        "reportFilename": "testResults",
+        "charts": "true",
+        "autoOpen": "true"
+      },
+      "version": "5.1.0"
+    }
+  }
+}

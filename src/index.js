@@ -3,7 +3,9 @@ var handlers = require("./handlers")
 var database = require("./database")
 
 var port = 9090;
-var connectionString = "mongodb://localhost/exampleDb";
+var connectionString = process.env.MONGO_URI;
 
 database.initialize(connectionString);
-server.start(port, handlers.setupHandlers);
+const serverObj = server.start(port, handlers.setupHandlers);
+
+module.exports = serverObj
