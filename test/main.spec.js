@@ -51,9 +51,4 @@ describe('Main Flow', () => {
         return response
     })
 
-
-
-    afterEach(async () => {
-        await mongoHelper.cleanup()
-    })
 })
