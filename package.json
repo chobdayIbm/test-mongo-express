@@ -4,9 +4,9 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "test:watch": "nodemon --exec npm test",
-    "coverage": "nyc mocha"
+    "coverage": "nyc npm test"
   },
   "dependencies": {
     "express": "~4.6.x",

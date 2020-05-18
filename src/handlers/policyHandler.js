@@ -33,7 +33,7 @@ function search(request, response) {
 	if (searchObject.expirationDate) {
 		searchObject.expirationDate = new Date(searchObject.expirationDate);
 	}
-
+	console.log(`searchObject:${JSON.stringify(searchObject)}`)
 	Policy.find(searchObject, function(err, policies) {
 		if (err) {
 			response.status(400).send(err);

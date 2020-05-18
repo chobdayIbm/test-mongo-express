@@ -15,6 +15,11 @@ describe('Test infrastructure', () => {
     })
 })
 
+
+afterEach(async () => {
+    await mongoHelper.cleanup()
+})
+
 after('Runs after all tests suites', () => {
     console.log(`Tests end at ${new Date()}`)
 })

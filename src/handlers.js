@@ -19,15 +19,15 @@ function setupHandlers(router) {
 	router.get("/claims", function(request, response) {
 		ClaimHandler.getAll(request, response);
 	});
-	// router.get("/claims/:claimNumber", function(request, response) {
-	// 	ClaimHandler.get(request, response);
-	// });
+	router.get("/claims/:claimNumber", function(request, response) {
+		ClaimHandler.get(request, response);
+	});
 	router.post("/claims", function(request, response) {
 		ClaimHandler.insert(request, response);
 	});
-	// router.post("/claims/search", function(request, response) {
-	// 	ClaimHandler.search(request, response);
-	// });
+	router.post("/claims/search", function(request, response) {
+		ClaimHandler.search(request, response);
+	});
 }
 
 exports.setupHandlers = setupHandlers

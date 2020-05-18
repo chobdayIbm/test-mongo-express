@@ -28,12 +28,22 @@ Before committing to git, update `.gitignore` to ignore nyc output
 
 ## Main Flow
 Please look at `test/main.spec.js` and note how it makes use of _test helpers_.  
-The module `supertest` is added because this is an Express app  
+The module `supertest` is added because this is an Express app.
+- Because the app starts an http server by calling listen, mocha needs to use the _exit_ flag
 The module `mongodb-memory-server` is added to run tests quickly against MongoDB  
 
-Remember to run `npm run coverage` before committing.  For this example, it covers 
-* >70% of statements  
-* >30% of branches.
+Remember to run `npm run coverage` before committing. 
+
+
+
+## Others Flow
+Please look at `test/alt.spec.js` 
+
+The aim of testing other flows is to reach a good test coverage.  However, the definition of _good_ is multi-faceted.
+* The common, obvious answer of getting a contrived target, e.g. 100% or even 80% coverage is not useful.
+* It is better to think of the risks of code that is not covered by automated tests.  
+* For example, functions with many parameters are hard to test and may indicate a need for re-design.  
+* Don't take my word for it, refer to https://martinfowler.com/bliki/TestCoverage.html
 
 
 ## Background of legacy app ##

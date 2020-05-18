@@ -3,7 +3,8 @@ chai.should()
 import supertest from 'supertest'
 import mongoHelper from './helpers/common.helper'
 import match from './helpers/match.helper'
-import { mongo } from 'mongoose'
+
+import {policy1, claim1} from './helpers/testObjects.helper'
 
 let server // New app for each test flow
 
@@ -56,17 +57,3 @@ describe('Main Flow', () => {
         await mongoHelper.cleanup()
     })
 })
-
-const policy1 = {
-    policyNumber: "P1",
-    firstName: "John",
-    lastName: "Tan",
-    validDate: Date("2018-01-01"),
-}
-const claim1 = {
-	"description": "test2",
-	"policyNumber": "P1",
-	"issues": [
-		{"title": "tissue", "description": "tissue"}
-	]
-}
