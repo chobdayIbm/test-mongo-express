@@ -15,6 +15,7 @@ function getAll(request, response) {
 function get(request, response) {
 	Policy.findOne({"policyNumber": request.params.policyNumber}, function(err, policy) {
 		if (err) {
+			console.log(JSON.stringify(response))
 			response.status(400).send(err);
 		}
 		else {
