@@ -42,7 +42,7 @@ function insert(request, response) {
 			} else if (!data) {
 				response.status(400).send("Invalid policy");
 			} else {
-				claim.save(claimsaveCallback);
+				claim.save(saveToAudit(claimsaveCallback));
 			}
 		};
 		var claimsaveCallback = function(error) {
@@ -52,6 +52,7 @@ function insert(request, response) {
 				response.status(201).json(claim.toBasic());
 			}
 		};
+
 
 		Policy.findOne({"policyNumber": claim.policyNumber}, policyExistsCallback);;
 	}
@@ -74,6 +75,33 @@ function search(request, response) {
 // Generate a random alphanumeric string
 function generateId() {
 	return Math.random().toString(36).slice(2).toUpperCase();
+}
+
+function saveToAudit(msg, cb) {
+	var amqp = require('amqplib/callback_api');
+	var AUDIT_QUEUE_URI='amqp://localhost'
+	amqp.connect(AUDIT_QUEUE_URI, function(error0, connection) {
+		if (error0) {
+			throw error0;
+		}
+		connection.createChannel(function(error1, channel) {
+			if (error1) {
+				throw error1;
+			}
+			var exchange = 'claim_audit';
+
+			channel.assertExchange(exchange, 'direct', {
+				durable: false
+			});
+			channel.publish(exchange, 'claim', Buffer.from(msg));
+			console.log(" [x] Sent %s", msg);
+		});
+
+		setTimeout(function() {
+			connection.close();
+			cb()
+		}, 500);
+	});
 }
 
 exports.getAll = getAll
