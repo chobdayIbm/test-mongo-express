@@ -1,13 +1,6 @@
 import td from 'testdouble'
 
-function FakeMongoose() {
-    return {
-        Schema: {
-            methods : function() {}
-        },
-        model: function() {}
-    }
-}
+
 // var mongooseTd = td.replace('mongoose', td.object(new FakeMongoose()))
 // TODO move out as replace must be reset after test
 
@@ -24,7 +17,20 @@ const responseObj = {
     },
     send: function(obj) {
         this._sendObj = obj
+    },
+    json: function(obj) {
+        this._sendObj = JSON.stringify(obj)
     }
 }
 
-module.exports = {requestObj, responseObj}
+const MongooseTestDouble = {
+    Schema: function() {
+        return {
+            methods : function() {}
+        }
+    },
+    model: function() {}
+
+}
+
+export  {requestObj, responseObj, MongooseTestDouble}
