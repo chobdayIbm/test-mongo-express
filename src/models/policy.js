@@ -9,6 +9,7 @@ var PolicySchema = new Schema({
 	expirationDate: Date
 });
 
+
 PolicySchema.methods.valid = function() {
 	if (!this.policyNumber || !this.firstName || !this.lastName || !this.validDate) {
 		return false;
@@ -33,5 +34,5 @@ PolicySchema.methods.toBasic = function() {
 	}
 	return copy;
 };
-
+console.dir(PolicySchema)
 module.exports = mongoose.model("Policy", PolicySchema);

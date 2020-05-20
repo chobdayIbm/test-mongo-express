@@ -45,6 +45,9 @@ The aim of testing other flows is to reach a good test coverage.  However, the d
 * For example, functions with many parameters are hard to test and may indicate a need for re-design.  
 * Don't take my word for it, refer to https://martinfowler.com/bliki/TestCoverage.html
 
+Testing exceptions takes more effort, as simulating the exception requires setting up the code under test and stubbing the dependencies.  Focus on the most important exceptions and there is less value in testing other exception code that follow this pattern.
+Please look at `test/exception.spec.js`
+The module `testdouble` is added for stubbing.
 
 ## Background of legacy app ##
 It is a example of ~2014 Node.js Mongoose application, to CRUD for insurance policy and claim 

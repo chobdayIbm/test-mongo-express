@@ -1,8 +1,33 @@
 import td from 'testdouble'
 
 
-// var mongooseTd = td.replace('mongoose', td.object(new FakeMongoose()))
-// TODO move out as replace must be reset after test
+const MongooseTestDouble = {
+    Schema: function(fields) {
+        return {
+            fields: fields,
+            methods: {
+                    'find': function(){},
+                    'findOne': function(){},
+                    'findById': function(){},
+                    'count': function(){},
+                    'remove': function(){},
+                    'distinct': function(){},
+                    'where': function(){},
+                    'update': function(){},
+            },
+        }
+    },
+    model: function(name, schema2) {
+        const result = {}
+        Object.keys(schema2.fields).forEach(key => {
+            result[key] = schema2.fields[key]
+        })
+        Object.keys(schema2.methods).forEach(key => {
+            result[key] = schema2.methods[key]
+        })
+        return result
+    }
+}
 
 const requestObj = {
     params: {}
@@ -23,14 +48,5 @@ const responseObj = {
     }
 }
 
-const MongooseTestDouble = {
-    Schema: function() {
-        return {
-            methods : function() {}
-        }
-    },
-    model: function() {}
-
-}
 
 export  {requestObj, responseObj, MongooseTestDouble}
