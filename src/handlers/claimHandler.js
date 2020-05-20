@@ -1,6 +1,7 @@
 var Claim = require("../models/claim")
 var Policy = require("../models/policy")
 var Common = require("./common");
+var amqp = require('amqplib/callback_api');
 
 function getAll(request, response) {
 	Claim.find(function(err, claims) {
@@ -42,16 +43,41 @@ function insert(request, response) {
 			} else if (!data) {
 				response.status(400).send("Invalid policy");
 			} else {
-				claim.save(saveToAudit(JSON.stringify(claim), claimsaveCallback));
+				claim.save(claimsaveCallback);
 			}
 		};
 		var claimsaveCallback = function(error) {
 			if (error) {
 				response.status(400).send(error);
 			} else {
-				response.status(201).json(claim.toBasic());
+				saveAudit()
 			}
 		};
+		var saveAudit = function() {
+			var AUDIT_QUEUE_URI = process.env.RABBIT_MQ_URI || 'amqp://localhost'
+			amqp.connect(AUDIT_QUEUE_URI, function(error0, connection) {
+				if (error0) {
+					throw error0;
+				}
+				connection.createChannel(function(error1, channel) {
+					if (error1) {
+						throw error1;
+					}
+					var exchange = 'claim_audit';
+		
+					channel.assertExchange(exchange, 'direct', {
+						durable: false
+					});
+					channel.publish(exchange, 'claim', Buffer.from(JSON.stringify(claim)));
+					console.log(" [x] Sent %s", claim);
+				});
+		
+				setTimeout(function() {
+					connection.close();
+					response.status(201).json(claim.toBasic());
+				}, 500);
+			});
+		}
 
 
 		Policy.findOne({"policyNumber": claim.policyNumber}, policyExistsCallback);;
@@ -77,32 +103,7 @@ function generateId() {
 	return Math.random().toString(36).slice(2).toUpperCase();
 }
 
-function saveToAudit(msg, cb) {
-	var amqp = require('amqplib/callback_api');
-	var AUDIT_QUEUE_URI='amqp://localhost'
-	amqp.connect(AUDIT_QUEUE_URI, function(error0, connection) {
-		if (error0) {
-			throw error0;
-		}
-		connection.createChannel(function(error1, channel) {
-			if (error1) {
-				throw error1;
-			}
-			var exchange = 'claim_audit';
 
-			channel.assertExchange(exchange, 'direct', {
-				durable: false
-			});
-			channel.publish(exchange, 'claim', Buffer.from(msg));
-			console.log(" [x] Sent %s", msg);
-		});
-
-		setTimeout(function() {
-			connection.close();
-			cb()
-		}, 500);
-	});
-}
 
 exports.getAll = getAll
 exports.get = get

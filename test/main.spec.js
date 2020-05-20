@@ -1,19 +1,18 @@
 import chai from 'chai'
 chai.should()
 import supertest from 'supertest'
-import mongoHelper from './helpers/common.helper'
+import {mongoHelper, rabbitMqHelper} from './helpers/common.helper'
 import match from './helpers/match.helper'
 
 
+
 let server // New app for each test flow
-let rabbitMqConnection 
 
 describe('Main Flow', () => {
     before(async () => {
-        const RABBIT_MQ_URI = 'amqp://localhost'
-        rabbitMqConnection = await amqp.connect(RABBIT_MQ_URI);
-        return rabbitMqConnection
+        await rabbitMqHelper.start()
     })
+
     beforeEach(() => {
         server = require('../src/index')
         mongoHelper.createDoc('policies', policy1)
@@ -30,7 +29,8 @@ describe('Main Flow', () => {
 
     it.only('can create a claim', async () => {
         const messages = []
-        await setupQueue(messages)
+        await rabbitMqHelper.setupListener(
+            'claim_audit', 'direct', 'claim', messages)
 
         const response = await supertest(server)
             .post('/claims')
@@ -71,7 +71,7 @@ describe('Main Flow', () => {
     })
 
     after(() => {
-        rabbitMqConnection.close();
+        rabbitMqHelper.close();
     })
 })
 
@@ -89,26 +89,8 @@ const claim1 = {
 	]
 }
 
-import amqp from 'amqplib';
-async function setupQueue(messages) {
-    try {
-        const channel = await rabbitMqConnection.createChannel();
-        const exchangeName = 'claim_audit'
-        await channel.assertExchange(exchangeName, 'direct', {durable: false})
 
-        const queue = await channel.assertQueue('', {exclusive: true})
-        const routingKey = 'claim'
-        const binding = await channel.bindQueue(queue.queue, exchangeName, routingKey);
-        
-        channel.consume(queue.queue, function(msg) {
-            messages.push(JSON.parse(msg.content.toString()))
-            console.log(" [x] %s: '%s'", msg.fields.routingKey, msg.content.toString());
-        }, {
-            noAck: true
-        });
-        return channel
+async function setupRabbitMqListener(messages) {
 
-    } catch(e) {
-        throw e
-    }
 }
+
