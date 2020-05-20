@@ -9,6 +9,7 @@ const match = (expectedResult, result, ...exceptionFields) => {
             expectedResultClone[key] = Date.parse(expectedResult[key])
         }
     })
+    console.log(expectedResultClone)
     Object.entries(resultClone).forEach(([key, value]) => {
         if (exceptionFields.includes(key)) {
             delete resultClone[key]

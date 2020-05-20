@@ -3,11 +3,17 @@ chai.should()
 import supertest from 'supertest'
 import mongoHelper from './helpers/common.helper'
 import match from './helpers/match.helper'
-import { mongo } from 'mongoose'
+
 
 let server // New app for each test flow
+let rabbitMqConnection 
 
 describe('Main Flow', () => {
+    before(async () => {
+        const RABBIT_MQ_URI = 'amqp://localhost'
+        rabbitMqConnection = await amqp.connect(RABBIT_MQ_URI);
+        return rabbitMqConnection
+    })
     beforeEach(() => {
         server = require('../src/index')
         mongoHelper.createDoc('policies', policy1)
@@ -22,7 +28,10 @@ describe('Main Flow', () => {
         return response
     })
 
-    it('can create a claim', async () => {
+    it.only('can create a claim', async () => {
+        const messages = []
+        await setupQueue(messages)
+
         const response = await supertest(server)
             .post('/claims')
             .send(claim1)
@@ -36,7 +45,12 @@ describe('Main Flow', () => {
         claim1.policyNumber.should.eql(dbRecord.policyNumber)
         dbRecord.issues.length.should.equals(1)
         match(claim1.issues[0], dbRecord.issues[0], '_id')
-
+        
+        messages.length.should.equals(1)
+        messages[0].description.should.eql(dbRecord.description)
+        messages[0].policyNumber.should.eql(dbRecord.policyNumber)
+        messages[0].issues.length.should.equals(1)
+        match(messages[0].issues[0], dbRecord.issues[0], '_id')
         return response
     })
 
@@ -55,6 +69,10 @@ describe('Main Flow', () => {
     afterEach(async () => {
         await mongoHelper.cleanup()
     })
+
+    after(() => {
+        rabbitMqConnection.close();
+    })
 })
 
 const policy1 = {
@@ -69,4 +87,28 @@ const claim1 = {
 	"issues": [
 		{"title": "tissue", "description": "tissue"}
 	]
+}
+
+import amqp from 'amqplib';
+async function setupQueue(messages) {
+    try {
+        const channel = await rabbitMqConnection.createChannel();
+        const exchangeName = 'claim_audit'
+        await channel.assertExchange(exchangeName, 'direct', {durable: false})
+
+        const queue = await channel.assertQueue('', {exclusive: true})
+        const routingKey = 'claim'
+        const binding = await channel.bindQueue(queue.queue, exchangeName, routingKey);
+        
+        channel.consume(queue.queue, function(msg) {
+            messages.push(JSON.parse(msg.content.toString()))
+            console.log(" [x] %s: '%s'", msg.fields.routingKey, msg.content.toString());
+        }, {
+            noAck: true
+        });
+        return channel
+
+    } catch(e) {
+        throw e
+    }
 }

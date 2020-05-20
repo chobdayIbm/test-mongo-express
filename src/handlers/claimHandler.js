@@ -42,7 +42,7 @@ function insert(request, response) {
 			} else if (!data) {
 				response.status(400).send("Invalid policy");
 			} else {
-				claim.save(saveToAudit(claimsaveCallback));
+				claim.save(saveToAudit(JSON.stringify(claim), claimsaveCallback));
 			}
 		};
 		var claimsaveCallback = function(error) {
