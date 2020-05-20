@@ -12,3 +12,6 @@ slow: 75
 timeout: 2000
 ui: bdd
 diff: true
+file:
+    - 'test/root.spec.js'
+    - 'test/main.spec.js'

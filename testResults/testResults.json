@@ -5,8 +5,8 @@
     "passes": 10,
     "pending": 1,
     "failures": 0,
-    "start": "2020-05-20T03:45:42.533Z",
-    "end": "2020-05-20T03:45:42.826Z",
+    "start": "2020-05-20T03:56:51.099Z",
+    "end": "2020-05-20T03:56:51.392Z",
     "duration": 293,
     "testsRegistered": 11,
     "passPercent": 100,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "743c5ca5-c1d3-4cc8-8731-72c462e68131",
+      "uuid": "f0236106-1f16-40c2-9eeb-ef2666eb0f31",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
           "title": "\"before all\" hook: Runs before all tests suites",
           "fullTitle": "\"before all\" hook: Runs before all tests suites",
           "timedOut": false,
-          "duration": 77,
+          "duration": 73,
           "state": null,
           "speed": null,
           "pass": false,
@@ -36,8 +36,8 @@
           "context": null,
           "code": "console.log(`Tests start at ${new Date()}`);\nawait _common.default.start();",
           "err": {},
-          "uuid": "91a5380d-cd44-4f30-90cb-34ccaa589858",
-          "parentUUID": "743c5ca5-c1d3-4cc8-8731-72c462e68131",
+          "uuid": "524e2816-0dff-4499-b497-f524567341f7",
+          "parentUUID": "f0236106-1f16-40c2-9eeb-ef2666eb0f31",
           "isHook": true,
           "skipped": false
         }
@@ -56,8 +56,8 @@
           "context": null,
           "code": "console.log(`Tests end at ${new Date()}`);",
           "err": {},
-          "uuid": "b8ba117b-9324-4ada-8cb4-937a8ad28532",
-          "parentUUID": "743c5ca5-c1d3-4cc8-8731-72c462e68131",
+          "uuid": "1f99dff2-6677-456d-b53c-a04e1773c007",
+          "parentUUID": "f0236106-1f16-40c2-9eeb-ef2666eb0f31",
           "isHook": true,
           "skipped": false
         },
@@ -65,7 +65,7 @@
           "title": "\"after each\" hook",
           "fullTitle": "\"after each\" hook",
           "timedOut": false,
-          "duration": 0,
+          "duration": 1,
           "state": null,
           "speed": null,
           "pass": false,
@@ -74,8 +74,8 @@
           "context": null,
           "code": "await _common.default.cleanup();",
           "err": {},
-          "uuid": "c0be8d41-5185-459e-bdec-ad68d139c6bb",
-          "parentUUID": "743c5ca5-c1d3-4cc8-8731-72c462e68131",
+          "uuid": "9b4eadda-f931-44dd-9aa1-4bc2c16cb0f9",
+          "parentUUID": "f0236106-1f16-40c2-9eeb-ef2666eb0f31",
           "isHook": true,
           "skipped": false
         }
@@ -83,14 +83,53 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "e36486f2-1eca-445e-91a9-ab80a594ca2e",
-          "title": "Alternate Flow",
-          "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/alt.spec.js",
-          "file": "/test/alt.spec.js",
+          "uuid": "48cf58b8-5df7-47ab-aaf2-6e5159734e79",
+          "title": "Test infrastructure",
+          "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/root.spec.js",
+          "file": "/test/root.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "is running",
+              "fullTitle": "Test infrastructure is running",
+              "timedOut": false,
+              "duration": 0,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const result = await new Promise((resolve, reject) => resolve());\nreturn result;",
+              "err": {},
+              "uuid": "48b31b11-5814-46ef-be77-b7f9b3b14a6c",
+              "parentUUID": "48cf58b8-5df7-47ab-aaf2-6e5159734e79",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "48b31b11-5814-46ef-be77-b7f9b3b14a6c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "723dd055-bcf2-4985-a6c0-c9bf2cc03571",
+          "title": "Main Flow",
+          "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/main.spec.js",
+          "file": "/test/main.spec.js",
           "beforeHooks": [
             {
               "title": "\"before each\" hook",
-              "fullTitle": "Alternate Flow \"before each\" hook",
+              "fullTitle": "Main Flow \"before each\" hook",
               "timedOut": false,
               "duration": 0,
               "state": null,
@@ -99,10 +138,106 @@
               "fail": false,
               "pending": false,
               "context": null,
+              "code": "server = require('../src/index');\n_common.default.createDoc('policies', _testObjects.policy1);",
+              "err": {},
+              "uuid": "ddf7e19e-390c-40be-a0ae-32f8a4e810d6",
+              "parentUUID": "723dd055-bcf2-4985-a6c0-c9bf2cc03571",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "can view a policy",
+              "fullTitle": "Main Flow can view a policy",
+              "timedOut": false,
+              "duration": 34,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await (0, _supertest.default)(server).get(`/policies/${_testObjects.policy1.policyNumber}`);\nresponse.status.should.equal(200);\n(0, _match.default)(_testObjects.policy1, response.body, '_id');\nreturn response;",
+              "err": {},
+              "uuid": "c646007e-f5bc-49a0-a9e3-5908ed39b803",
+              "parentUUID": "723dd055-bcf2-4985-a6c0-c9bf2cc03571",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "can create a claim",
+              "fullTitle": "Main Flow can create a claim",
+              "timedOut": false,
+              "duration": 28,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await (0, _supertest.default)(server).post('/claims').send(_testObjects.claim1).set('Accept', 'application/json');\nconst claimNumber = response.body.claimNumber;\nresponse.status.should.equal(201);\nconst dbRecord = await _common.default.findOne('claims', {\n  claimNumber: claimNumber\n});\n_testObjects.claim1.description.should.eql(dbRecord.description);\n_testObjects.claim1.policyNumber.should.eql(dbRecord.policyNumber);\ndbRecord.issues.length.should.equals(1);\n(0, _match.default)(_testObjects.claim1.issues[0], dbRecord.issues[0], '_id');\nreturn response;",
+              "err": {},
+              "uuid": "615e3533-5284-4305-946b-c4815472d3b7",
+              "parentUUID": "723dd055-bcf2-4985-a6c0-c9bf2cc03571",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "can view a claim",
+              "fullTitle": "Main Flow can view a claim",
+              "timedOut": false,
+              "duration": 6,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const {\n  _id\n} = await _common.default.createDoc('claims', _testObjects.claim1);\nconst response = await (0, _supertest.default)(server).get(`/claims?claimNumber=${_id}`);\nresponse.status.should.equal(200);\n(0, _match.default)(_testObjects.claim1, response.body[0], '_id');\nreturn response;",
+              "err": {},
+              "uuid": "e5a19627-ed8b-4db7-b68d-fb0c5eeb5ac2",
+              "parentUUID": "723dd055-bcf2-4985-a6c0-c9bf2cc03571",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c646007e-f5bc-49a0-a9e3-5908ed39b803",
+            "615e3533-5284-4305-946b-c4815472d3b7",
+            "e5a19627-ed8b-4db7-b68d-fb0c5eeb5ac2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 68,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "5a8eb491-032c-4193-bcaf-1dca44807c4d",
+          "title": "Alternate Flow",
+          "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/alt.spec.js",
+          "file": "/test/alt.spec.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook",
+              "fullTitle": "Alternate Flow \"before each\" hook",
+              "timedOut": false,
+              "duration": 1,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
               "code": "server = require('../src/index');\n_common.default.createDoc('policies', _testObjects.policy1);\n_common.default.createDoc('claims', _testObjects.claim1);",
               "err": {},
-              "uuid": "46e98673-7efc-4016-b1bc-b7d85eb0a558",
-              "parentUUID": "e36486f2-1eca-445e-91a9-ab80a594ca2e",
+              "uuid": "7a51dd3b-c1e8-46d8-b7de-5e3366cecd21",
+              "parentUUID": "5a8eb491-032c-4193-bcaf-1dca44807c4d",
               "isHook": true,
               "skipped": false
             }
@@ -113,17 +248,17 @@
               "title": "can get all policy",
               "fullTitle": "Alternate Flow can get all policy",
               "timedOut": false,
-              "duration": 38,
+              "duration": 2,
               "state": "passed",
-              "speed": "medium",
+              "speed": "fast",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
               "code": "const response = await (0, _supertest.default)(server).get(`/policies`);\nresponse.status.should.equal(200);\nObject.keys(response.body).should.be.eqls(['0']);\n(0, _match.default)(_testObjects.policy1, response.body[\"0\"], '_id');\nreturn response;",
               "err": {},
-              "uuid": "cb39cec1-04fd-4cd6-bdfa-aabe4bc55b79",
-              "parentUUID": "e36486f2-1eca-445e-91a9-ab80a594ca2e",
+              "uuid": "7fd671a8-3835-48ba-8de2-fc095ffb1da7",
+              "parentUUID": "5a8eb491-032c-4193-bcaf-1dca44807c4d",
               "isHook": false,
               "skipped": false
             },
@@ -131,7 +266,7 @@
               "title": "can search a policy",
               "fullTitle": "Alternate Flow can search a policy",
               "timedOut": false,
-              "duration": 13,
+              "duration": 3,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -140,8 +275,8 @@
               "context": null,
               "code": "const response = await (0, _supertest.default)(server).post('/policies/search').send({\n  validDate: \"2018-01-01\"\n}).set('Accept', 'application/json');\nconsole.log(`response${response.text}`);\nresponse.status.should.equal(200);\nObject.keys(response.body).should.be.eqls(['0']);\n(0, _match.default)(_testObjects.policy1, response.body['0'], '_id');\nreturn response;",
               "err": {},
-              "uuid": "9a9f98e5-ae83-4975-8b24-0579ec40d6d6",
-              "parentUUID": "e36486f2-1eca-445e-91a9-ab80a594ca2e",
+              "uuid": "ff353e42-2717-4132-96c1-afb2ce77faf9",
+              "parentUUID": "5a8eb491-032c-4193-bcaf-1dca44807c4d",
               "isHook": false,
               "skipped": false
             },
@@ -149,7 +284,7 @@
               "title": "can get all claims",
               "fullTitle": "Alternate Flow can get all claims",
               "timedOut": false,
-              "duration": 4,
+              "duration": 3,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -158,8 +293,8 @@
               "context": null,
               "code": "const response = await (0, _supertest.default)(server).get(`/claims`);\nresponse.status.should.equal(200);\nObject.keys(response.body).should.be.eqls(['0']);\n(0, _match.default)(_testObjects.claim1, response.body[\"0\"], '_id');\nreturn response;",
               "err": {},
-              "uuid": "2eb9b1d0-8d3b-4e81-be05-98a237ca76c2",
-              "parentUUID": "e36486f2-1eca-445e-91a9-ab80a594ca2e",
+              "uuid": "24429462-ea46-4fe8-ac2a-f58939b35c97",
+              "parentUUID": "5a8eb491-032c-4193-bcaf-1dca44807c4d",
               "isHook": false,
               "skipped": false
             },
@@ -167,7 +302,7 @@
               "title": "can search a claim",
               "fullTitle": "Alternate Flow can search a claim",
               "timedOut": false,
-              "duration": 5,
+              "duration": 3,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -176,29 +311,29 @@
               "context": null,
               "code": "const response = await (0, _supertest.default)(server).post('/claims/search').send({\n  \"description\": \"test2\"\n}).set('Accept', 'application/json');\nresponse.status.should.equal(200);\nObject.keys(response.body).should.be.eqls(['0']);\n(0, _match.default)(_testObjects.claim1, response.body[0], '_id');\nreturn response;",
               "err": {},
-              "uuid": "96cf1aa9-5725-4a66-a17b-82e4a57c5457",
-              "parentUUID": "e36486f2-1eca-445e-91a9-ab80a594ca2e",
+              "uuid": "6e2ad1bf-c91b-44dc-b4f1-855ca78950b1",
+              "parentUUID": "5a8eb491-032c-4193-bcaf-1dca44807c4d",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "cb39cec1-04fd-4cd6-bdfa-aabe4bc55b79",
-            "9a9f98e5-ae83-4975-8b24-0579ec40d6d6",
-            "2eb9b1d0-8d3b-4e81-be05-98a237ca76c2",
-            "96cf1aa9-5725-4a66-a17b-82e4a57c5457"
+            "7fd671a8-3835-48ba-8de2-fc095ffb1da7",
+            "ff353e42-2717-4132-96c1-afb2ce77faf9",
+            "24429462-ea46-4fe8-ac2a-f58939b35c97",
+            "6e2ad1bf-c91b-44dc-b4f1-855ca78950b1"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 60,
+          "duration": 11,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         },
         {
-          "uuid": "b781bd1f-eb67-4813-8b42-9e60dde1ebcd",
+          "uuid": "2828c4ce-86f9-40e1-b8d5-5f6a9238ce7a",
           "title": "Important exception Flows",
           "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/exception.spec.js",
           "file": "/test/exception.spec.js",
@@ -217,8 +352,8 @@
               "context": null,
               "code": "_testdouble.default.reset();",
               "err": {},
-              "uuid": "3ae2ee70-a1b2-4f0e-9d11-a10ce4f17de8",
-              "parentUUID": "b781bd1f-eb67-4813-8b42-9e60dde1ebcd",
+              "uuid": "7e99f41b-aee4-47d8-8462-84e59401dad9",
+              "parentUUID": "2828c4ce-86f9-40e1-b8d5-5f6a9238ce7a",
               "isHook": true,
               "skipped": false
             }
@@ -226,7 +361,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "1c1bd422-6b05-44a0-9bfc-64e2e3d640cc",
+              "uuid": "6b3e5bc2-0437-4e8f-bc76-f4e59edfa20a",
               "title": "Policy Handler",
               "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/exception.spec.js",
               "file": "/test/exception.spec.js",
@@ -237,7 +372,7 @@
                   "title": "should send an error code when there is an error getting the policy ",
                   "fullTitle": "Important exception Flows Policy Handler should send an error code when there is an error getting the policy ",
                   "timedOut": false,
-                  "duration": 11,
+                  "duration": 10,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -246,26 +381,26 @@
                   "context": null,
                   "code": "const Policy = _testdouble.default.replace('../src/models/policy', _testdouble.default.object(['findOne']));\nconst PolicyHandler = require('../src/handlers/policyHandler');\nconst errorMessage = 'Random unexpected error';\nconst policy = null;\n_testdouble.default.when(Policy.findOne(_testdouble.default.matchers.anything())).thenCallback(errorMessage, policy);\nPolicyHandler.get(_testDoubles.requestObj, _testDoubles.responseObj);\n_testDoubles.responseObj._status.should.equal(400);\n_testDoubles.responseObj._sendObj.should.equal(errorMessage);",
                   "err": {},
-                  "uuid": "08676a48-a57a-4c5b-bc22-7c901201cbe0",
-                  "parentUUID": "1c1bd422-6b05-44a0-9bfc-64e2e3d640cc",
+                  "uuid": "c4d0e0f2-6b69-4128-bb82-7cb4ed594a25",
+                  "parentUUID": "6b3e5bc2-0437-4e8f-bc76-f4e59edfa20a",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "08676a48-a57a-4c5b-bc22-7c901201cbe0"
+                "c4d0e0f2-6b69-4128-bb82-7cb4ed594a25"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 11,
+              "duration": 10,
               "root": false,
               "rootEmpty": false,
               "_timeout": 2000
             },
             {
-              "uuid": "b12c5752-52a2-4196-b629-7b3a38baea17",
+              "uuid": "8019ec67-f673-4c24-ae24-c7125e4d0730",
               "title": "Main Handler",
               "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/exception.spec.js",
               "file": "/test/exception.spec.js",
@@ -285,8 +420,8 @@
                   "context": null,
                   "code": "",
                   "err": {},
-                  "uuid": "26b975bd-2e84-4810-8b36-1900f36d2401",
-                  "parentUUID": "b12c5752-52a2-4196-b629-7b3a38baea17",
+                  "uuid": "6aff2283-0c5d-48d7-a4db-b5e1d38b40ee",
+                  "parentUUID": "8019ec67-f673-4c24-ae24-c7125e4d0730",
                   "isHook": false,
                   "skipped": false
                 }
@@ -295,7 +430,7 @@
               "passes": [],
               "failures": [],
               "pending": [
-                "26b975bd-2e84-4810-8b36-1900f36d2401"
+                "6aff2283-0c5d-48d7-a4db-b5e1d38b40ee"
               ],
               "skipped": [],
               "duration": 0,
@@ -304,7 +439,7 @@
               "_timeout": 2000
             },
             {
-              "uuid": "b73c4dde-b396-4109-8f8a-3d6d109d4832",
+              "uuid": "f8c2fd37-b8ee-40f5-a6aa-80415eba63e4",
               "title": "Model",
               "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/exception.spec.js",
               "file": "/test/exception.spec.js",
@@ -322,17 +457,17 @@
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const mongoose = _testdouble.default.replace('mongoose', _testDoubles.MongooseTestDouble); //used internally on initialization\n\nconst Policy = require('../src/models/policy.js');\nPolicy.should.have.property('policyNumber');\nPolicy.findOne.should.be.an.instanceof(Function);\nPolicy.valid.should.be.an.instanceof(Function);",
+                  "code": "// Do not use this if there is no exception handling in the model file\nconst mongoose = _testdouble.default.replace('mongoose', _testDoubles.MongooseTestDouble); //used internally on initialization\n\nconst Policy = require('../src/models/policy.js');\nPolicy.should.have.property('policyNumber');\nPolicy.findOne.should.be.an.instanceof(Function);\nPolicy.valid.should.be.an.instanceof(Function);",
                   "err": {},
-                  "uuid": "562f29d4-67db-484f-92d0-95adb746a1a0",
-                  "parentUUID": "b73c4dde-b396-4109-8f8a-3d6d109d4832",
+                  "uuid": "3aeb3b55-0b96-4620-91a3-74f929ca6a75",
+                  "parentUUID": "f8c2fd37-b8ee-40f5-a6aa-80415eba63e4",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "562f29d4-67db-484f-92d0-95adb746a1a0"
+                "3aeb3b55-0b96-4620-91a3-74f929ca6a75"
               ],
               "failures": [],
               "pending": [],
@@ -348,141 +483,6 @@
           "pending": [],
           "skipped": [],
           "duration": 0,
-          "root": false,
-          "rootEmpty": false,
-          "_timeout": 2000
-        },
-        {
-          "uuid": "e3718f80-1eee-40b5-903a-fd95ea8750ea",
-          "title": "Main Flow",
-          "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/main.spec.js",
-          "file": "/test/main.spec.js",
-          "beforeHooks": [
-            {
-              "title": "\"before each\" hook",
-              "fullTitle": "Main Flow \"before each\" hook",
-              "timedOut": false,
-              "duration": 0,
-              "state": null,
-              "speed": null,
-              "pass": false,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "server = require('../src/index');\n_common.default.createDoc('policies', _testObjects.policy1);",
-              "err": {},
-              "uuid": "441e9476-52a8-4c50-afef-6d00c3a8cc5e",
-              "parentUUID": "e3718f80-1eee-40b5-903a-fd95ea8750ea",
-              "isHook": true,
-              "skipped": false
-            }
-          ],
-          "afterHooks": [],
-          "tests": [
-            {
-              "title": "can view a policy",
-              "fullTitle": "Main Flow can view a policy",
-              "timedOut": false,
-              "duration": 5,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "const response = await (0, _supertest.default)(server).get(`/policies/${_testObjects.policy1.policyNumber}`);\nresponse.status.should.equal(200);\n(0, _match.default)(_testObjects.policy1, response.body, '_id');\nreturn response;",
-              "err": {},
-              "uuid": "90abe648-fc1e-4243-9707-c0f58e1825ed",
-              "parentUUID": "e3718f80-1eee-40b5-903a-fd95ea8750ea",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "can create a claim",
-              "fullTitle": "Main Flow can create a claim",
-              "timedOut": false,
-              "duration": 13,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "const response = await (0, _supertest.default)(server).post('/claims').send(_testObjects.claim1).set('Accept', 'application/json');\nconst claimNumber = response.body.claimNumber;\nresponse.status.should.equal(201);\nconst dbRecord = await _common.default.findOne('claims', {\n  claimNumber: claimNumber\n});\n_testObjects.claim1.description.should.eql(dbRecord.description);\n_testObjects.claim1.policyNumber.should.eql(dbRecord.policyNumber);\ndbRecord.issues.length.should.equals(1);\n(0, _match.default)(_testObjects.claim1.issues[0], dbRecord.issues[0], '_id');\nreturn response;",
-              "err": {},
-              "uuid": "cf900848-d5a0-4a0a-994e-564691bdb1f8",
-              "parentUUID": "e3718f80-1eee-40b5-903a-fd95ea8750ea",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "can view a claim",
-              "fullTitle": "Main Flow can view a claim",
-              "timedOut": false,
-              "duration": 4,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "const {\n  _id\n} = await _common.default.createDoc('claims', _testObjects.claim1);\nconst response = await (0, _supertest.default)(server).get(`/claims?claimNumber=${_id}`);\nresponse.status.should.equal(200);\n(0, _match.default)(_testObjects.claim1, response.body[0], '_id');\nreturn response;",
-              "err": {},
-              "uuid": "abc702bb-f572-4122-9016-dfbd9af43a57",
-              "parentUUID": "e3718f80-1eee-40b5-903a-fd95ea8750ea",
-              "isHook": false,
-              "skipped": false
-            }
-          ],
-          "suites": [],
-          "passes": [
-            "90abe648-fc1e-4243-9707-c0f58e1825ed",
-            "cf900848-d5a0-4a0a-994e-564691bdb1f8",
-            "abc702bb-f572-4122-9016-dfbd9af43a57"
-          ],
-          "failures": [],
-          "pending": [],
-          "skipped": [],
-          "duration": 22,
-          "root": false,
-          "rootEmpty": false,
-          "_timeout": 2000
-        },
-        {
-          "uuid": "ebbaeee4-10e4-41d3-bd68-59dae40b0657",
-          "title": "Test infrastructure",
-          "fullFile": "/Users/colinhobday/project/bendigo/legacy-mongoose/test/root.spec.js",
-          "file": "/test/root.spec.js",
-          "beforeHooks": [],
-          "afterHooks": [],
-          "tests": [
-            {
-              "title": "is running",
-              "fullTitle": "Test infrastructure is running",
-              "timedOut": false,
-              "duration": 1,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "const result = await new Promise((resolve, reject) => resolve());\nreturn result;",
-              "err": {},
-              "uuid": "305491c8-256f-4e65-84f5-72f3c94cc3c7",
-              "parentUUID": "ebbaeee4-10e4-41d3-bd68-59dae40b0657",
-              "isHook": false,
-              "skipped": false
-            }
-          ],
-          "suites": [],
-          "passes": [
-            "305491c8-256f-4e65-84f5-72f3c94cc3c7"
-          ],
-          "failures": [],
-          "pending": [],
-          "skipped": [],
-          "duration": 1,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

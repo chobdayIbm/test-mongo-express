@@ -29,6 +29,7 @@ describe('Important exception Flows', () => {
         })
     
         it('a flow just to verify handlers are set up ', () => {
+            // Do not use this if there is no exception handling in the main file
             const mongoose = td.replace('mongoose', MongooseTestDouble) //used internally on initialization
             PolicyHandler = td.replace('../src/handlers/policyHandler')
             ClaimHandler = td.replace('../src/handlers/claimHandler')
@@ -56,6 +57,7 @@ describe('Important exception Flows', () => {
 
     describe('Model', () => {
         it('a flow just to verify model is set up ', () => {
+            // Do not use this if there is no exception handling in the model file
             const mongoose = td.replace('mongoose', MongooseTestDouble) //used internally on initialization
             const Policy = require('../src/models/policy.js')
 
