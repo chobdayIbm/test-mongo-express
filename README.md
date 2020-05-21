@@ -32,8 +32,11 @@ The module `supertest` is added because this is an Express app.
 - Because the app starts an http server by calling listen, mocha needs to use the _exit_ flag
 The module `mongodb-memory-server` is added to run tests quickly against MongoDB  
 
-Remember to run `npm run coverage` before committing. 
+To test RabbitMQ, a test setup needs to be run.  An easy way to do it is by running 
+`docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management`
+The uri will be _amqp://localhost_
 
+Remember to run `npm run coverage` before committing.  For this example, it covers 
 
 
 ## Others Flow
@@ -48,6 +51,9 @@ The aim of testing other flows is to reach a good test coverage.  However, the d
 Testing exceptions takes more effort, as simulating the exception requires setting up the code under test and stubbing the dependencies.  Focus on the most important exceptions and there is less value in testing other exception code that follow this pattern.
 Please look at `test/exception.spec.js`
 The module `testdouble` is added for stubbing.
+
+
+
 
 ## Background of legacy app ##
 It is a example of ~2014 Node.js Mongoose application, to CRUD for insurance policy and claim 

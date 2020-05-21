@@ -1,14 +1,14 @@
 import chai from 'chai'
 chai.should()
 
-import mongoHelper from './helpers/common.helper'
+import { mongoHelper } from './helpers/common.helper'
 
 before('Runs before all tests suites', async () => {
     console.log(`Tests start at ${new Date()}`)
     await mongoHelper.start()
 })
 
-describe('Test infrastructure', () => {
+describe.only('Test infrastructure', () => {
     it('is running', async () => {
         const result = await new Promise((resolve,reject) => resolve())
         return result

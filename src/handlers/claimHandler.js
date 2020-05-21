@@ -1,6 +1,7 @@
 var Claim = require("../models/claim")
 var Policy = require("../models/policy")
 var Common = require("./common");
+var amqp = require('amqplib/callback_api');
 
 function getAll(request, response) {
 	Claim.find(function(err, claims) {
@@ -49,9 +50,35 @@ function insert(request, response) {
 			if (error) {
 				response.status(400).send(error);
 			} else {
-				response.status(201).json(claim.toBasic());
+				saveAudit()
 			}
 		};
+		var saveAudit = function() {
+			var AUDIT_QUEUE_URI = process.env.RABBIT_MQ_URI || 'amqp://localhost'
+			amqp.connect(AUDIT_QUEUE_URI, function(error0, connection) {
+				if (error0) {
+					throw error0;
+				}
+				connection.createChannel(function(error1, channel) {
+					if (error1) {
+						throw error1;
+					}
+					var exchange = 'claim_audit';
+		
+					channel.assertExchange(exchange, 'direct', {
+						durable: false
+					});
+					channel.publish(exchange, 'claim', Buffer.from(JSON.stringify(claim)));
+					console.log(" [x] Sent %s", claim);
+				});
+		
+				setTimeout(function() {
+					connection.close();
+					response.status(201).json(claim.toBasic());
+				}, 500);
+			});
+		}
+
 
 		Policy.findOne({"policyNumber": claim.policyNumber}, policyExistsCallback);;
 	}
@@ -75,6 +102,8 @@ function search(request, response) {
 function generateId() {
 	return Math.random().toString(36).slice(2).toUpperCase();
 }
+
+
 
 exports.getAll = getAll
 exports.get = get
