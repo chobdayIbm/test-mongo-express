@@ -8,7 +8,7 @@ before('Runs before all tests suites', async () => {
     await mongoHelper.start()
 })
 
-describe.only('Test infrastructure', () => {
+describe('Test infrastructure', () => {
     it('is running', async () => {
         const result = await new Promise((resolve,reject) => resolve())
         return result

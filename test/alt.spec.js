@@ -1,7 +1,7 @@
 import chai from 'chai'
 chai.should()
 import supertest from 'supertest'
-import mongoHelper from './helpers/common.helper'
+import { mongoHelper } from './helpers/common.helper'
 import match from './helpers/match.helper'
 
 import {policy1, claim1} from './helpers/testObjects.helper'
