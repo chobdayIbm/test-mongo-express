@@ -34,5 +34,4 @@ PolicySchema.methods.toBasic = function() {
 	}
 	return copy;
 };
-console.dir(PolicySchema)
 module.exports = mongoose.model("Policy", PolicySchema);

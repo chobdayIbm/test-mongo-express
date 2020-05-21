@@ -16,9 +16,9 @@ Note the configurations in
 * nodemon.json
 
 ## First Test
-Please look at `test/root.spec.js`
+Please look at `test/root.spec.js`  
 Run it whenever the codes change using 
-`npm run test:watch`
+`npm run test:watch`  
 Babel, nodemon and mocha need to be setup properly
 
 To run coverage
@@ -28,8 +28,7 @@ Before committing to git, update `.gitignore` to ignore nyc output
 
 ## Main Flow
 Please look at `test/main.spec.js` and note how it makes use of _test helpers_.  
-The module `supertest` is added because this is an Express app.
-- Because the app starts an http server by calling listen, mocha needs to use the _exit_ flag
+The module `supertest` is added because this is an Express app.  Because the app starts an http server by calling listen, mocha needs to use the _exit_ flag  
 The module `mongodb-memory-server` is added to run tests quickly against MongoDB  
 
 To test RabbitMQ, a test setup needs to be run.  An easy way to do it is by running 
@@ -40,7 +39,7 @@ Remember to run `npm run coverage` before committing.  For this example, it cove
 
 
 ## Others Flow
-Please look at `test/alt.spec.js` 
+Please look at `test/alt.spec.js`
 
 The aim of testing other flows is to reach a good test coverage.  However, the definition of _good_ is multi-faceted.
 * The common, obvious answer of getting a contrived target, e.g. 100% or even 80% coverage is not useful.
@@ -50,8 +49,8 @@ The aim of testing other flows is to reach a good test coverage.  However, the d
 
 Testing exceptions takes more effort, as simulating the exception requires setting up the code under test and stubbing the dependencies.  Focus on the most important exceptions and there is less value in testing other exception code that follow this pattern.
 Please look at `test/exception.spec.js`
-The module `testdouble` is added for stubbing.
-
+The module `testdouble` is added for stubbing errors.
+The module `nock` is added to simulate http errors.
 
 
 

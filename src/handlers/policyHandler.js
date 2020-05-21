@@ -14,8 +14,12 @@ function getAll(request, response) {
 					data += chunk;
 				})
 				resp.on('end', function() {
-					var dt = JSON.parse(data).datetime
-					console.log(`Get all policies at ${dt}`)
+					if (resp.statusCode == 200)  {
+						var dt = JSON.parse(data).datetime
+						console.log(`Get all policies at ${dt}`)
+					} else {
+						console.log(`Response from http://worldtimeapi.org/api/timezone/Asia/Singapore  has status code ${resp.statusCode}`)
+					}
 					response.json(Common.toBasicCollection(policies));
 				})
 			})
