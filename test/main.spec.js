@@ -5,7 +5,6 @@ import {mongoHelper, rabbitMqHelper} from './helpers/common.helper'
 import match from './helpers/match.helper'
 
 
-
 let server // New app for each test flow
 
 describe('Main Flow', () => {
@@ -27,7 +26,7 @@ describe('Main Flow', () => {
         return response
     })
 
-    it.only('can create a claim', async () => {
+    it('can create a claim', async () => {
         const messages = []
         await rabbitMqHelper.setupListener(
             'claim_audit', 'direct', 'claim', messages)
@@ -40,17 +39,21 @@ describe('Main Flow', () => {
         
         response.status.should.equal(201);
         
+        // Verify that the claim is saved in database
         const dbRecord = await mongoHelper.findOne('claims', {claimNumber: claimNumber})
         claim1.description.should.eql(dbRecord.description)
         claim1.policyNumber.should.eql(dbRecord.policyNumber)
         dbRecord.issues.length.should.equals(1)
         match(claim1.issues[0], dbRecord.issues[0], '_id')
         
+        // Verify that the claim is sent to the audit queue
         messages.length.should.equals(1)
+        messages[0]._id.should.eql(dbRecord._id.toString())
         messages[0].description.should.eql(dbRecord.description)
         messages[0].policyNumber.should.eql(dbRecord.policyNumber)
         messages[0].issues.length.should.equals(1)
         match(messages[0].issues[0], dbRecord.issues[0], '_id')
+
         return response
     })
 
@@ -65,13 +68,12 @@ describe('Main Flow', () => {
     })
 
 
-
     afterEach(async () => {
         await mongoHelper.cleanup()
     })
 
-    after(() => {
-        rabbitMqHelper.close();
+    after(async() => {
+        await rabbitMqHelper.close();
     })
 })
 

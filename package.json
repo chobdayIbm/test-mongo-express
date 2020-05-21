@@ -9,7 +9,7 @@
     "coverage": "nyc mocha"
   },
   "dependencies": {
-    "amqplib": "^0.5.6",
+    "amqplib": "~0.2.1",
     "body-parser": "~1.5.x",
     "express": "~4.6.x",
     "mongoose": "~4.0.0"

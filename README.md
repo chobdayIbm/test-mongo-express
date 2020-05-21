@@ -30,6 +30,9 @@ Before committing to git, update `.gitignore` to ignore nyc output
 Please look at `test/main.spec.js` and note how it makes use of _test helpers_.  
 The module `supertest` is added because this is an Express app  
 The module `mongodb-memory-server` is added to run tests quickly against MongoDB  
+To test RabbitMQ, a test setup needs to be run.  An easy way to do it is by running 
+`docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management`
+The uri will be _amqp://localhost_
 
 Remember to run `npm run coverage` before committing.  For this example, it covers 
 * >70% of statements  
