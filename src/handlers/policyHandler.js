@@ -7,7 +7,19 @@ function getAll(request, response) {
 			response.status(400).send(err);
 		}
 		else {
-			response.json(Common.toBasicCollection(policies));
+			var http = require('http')
+			http.get('http://worldtimeapi.org/api/timezone/Asia/Singapore', function(resp) {
+				var data = '';
+				resp.on('data', function(chunk) {
+					data += chunk;
+				})
+				resp.on('end', function() {
+					var dt = JSON.parse(data).datetime
+					console.log(`Get all policies at ${dt}`)
+					response.json(Common.toBasicCollection(policies));
+				})
+			})
+
 		}
 	});
 }

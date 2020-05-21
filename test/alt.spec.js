@@ -15,7 +15,7 @@ describe('Alternate Flow', () => {
         mongoHelper.createDoc('claims', claim1)
     })
 
-    it('can get all policy', async () => {
+    it.only('can get all policy', async () => {
         const response = await supertest(server)
             .get(`/policies`)
 
